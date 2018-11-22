@@ -144,7 +144,7 @@ echo "release heroku artifacts"
 # This is subsumed by the new buildpack PR
 # bin/release-heroku "v$VERSION"
 
-
+cd ..
 
 echo "pulling down metabase-buildpack"
 if ! [ -d "metabase-buildpack" ]; then
