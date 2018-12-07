@@ -82,3 +82,9 @@ latest_version_info=$(curl -f -s http://static.metabase.com/version-info.json | 
 check "latest version.info ($latest_version_info)" [ "$latest_version_info" == "v$VERSION" ]
 
 check "mac app dmg" "curl -f -s -o /dev/null -r 0-0 http://downloads.metabase.com/v$VERSION/Metabase.dmg"
+
+website_jar_version=$(curl -s 'https://metabase.com/start/jar.html' | grep -Eo 'v[0-9.]+' | head -1)
+check "website jar version ($website_jar_version)" [ "$website_jar_version" == "v$VERSION" ]
+
+website_mac_version=$(curl -s 'https://metabase.com/start/mac.html' | grep -Eo 'v[0-9.]+' | head -1)
+check "website Mac version ($website_mac_version)" [ "$website_mac_version" == "v$VERSION" ]
