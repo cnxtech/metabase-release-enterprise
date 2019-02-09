@@ -74,7 +74,9 @@ echo "Pushing Docker image with tag $docker_image_tag"
 docker push
 
 echo "Pushing Docker tag metabase/metabase-enterprise:latest"
+docker tag "$docker_image_tag" metabase/metabase:latest
 docker push metabase/metabase-enterprise:latest
 
 echo "uploading to s3"
+aws s3 cp "target/uberjar/metabase.jar" "s3://downloads.metabase.com/enterprise/v$VERSION/metabase.jar"
 aws s3 cp "target/uberjar/metabase.jar" "s3://downloads.metabase.com/enterprise/latest/metabase.jar"
