@@ -39,7 +39,7 @@ cd metabase-enterprise
 git fetch
 
 echo "checkout the correct branch : $BRANCH from origin/$BRANCH"
-git co "$BRANCH"
+git checkout "$BRANCH"
 
 echo "ensure the version is correct"
 sed -i '' s/^VERSION.*/VERSION=\"v$VERSION\"/ bin/version
@@ -71,10 +71,10 @@ cp target/uberjar/metabase.jar bin/docker/metabase.jar
 docker build -t "$docker_image_tag" bin/docker
 
 echo "Pushing Docker image with tag $docker_image_tag"
-docker push
+docker push "$docker_image_tag"
 
 echo "Pushing Docker tag metabase/metabase-enterprise:latest"
-docker tag "$docker_image_tag" metabase/metabase:latest
+docker tag "$docker_image_tag" metabase/metabase-enterprise:latest
 docker push metabase/metabase-enterprise:latest
 
 echo "uploading to s3"
